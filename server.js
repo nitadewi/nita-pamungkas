@@ -11,7 +11,6 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, '/public')));
 
 
-
 const url ='https://script.google.com/macros/s/AKfycbyEIY5o7o5eKg3uzKMx0D4E6nPPc6bnK1UoUfVR1ruHxcRaHZHP22ZTozoQg07qPn-K/exec'
 
 
