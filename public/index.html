@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>N & P Invitation</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Undangan Nita dan Pamungkas" />
+	<link rel="stylesheet" href="/fonts/font-awesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="/fonts/font-awesome/css/regular.min.css">
+	
+
+		<link rel="stylesheet" href="css/cover.css">
+
+	</head>
+	<body>
+		
+	<div class="fh5co-loader"></div>
+	<div class="background-image"></div>
+	<div id="page" class="bottom-center-text">
+		<div class="awal" style="text-align: center;">	
+			<p>Kepada yth:</p>
+			<p id="untuk"> - </p>
+			<p>di tempat</p>
+			<br>
+			<br>
+			<button class="btn tombol"><i class="far fa-envelope"></i> Buka Undangan</button>
+		</div>
+
+	</div>
+
+	
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<script>
+	 $(document).ready(function() {
+            $('.fh5co-loader').hide();
+
+            $(".tombol").click(function() {
+                $('.fh5co-loader').show();
+                localStorage.setItem('visitedPageA', 'true');
+                var new_url = "main.html";
+                window.location.href = new_url;
+            });
+
+            // Handle URL parameters
+            var url = new URL(window.location.href);
+            var to = url.searchParams.get("to");
+            if (to) {
+                document.getElementById("untuk").innerHTML = to.toUpperCase();
+                console.log(to);
+            }
+        });
+	</script>
+
+	</body>
+</html>
+
