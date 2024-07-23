@@ -205,7 +205,7 @@ var updateTextareaRows = function() {
 		textarea.rows = 10;
 	} 
 	else {
-		textarea.rows = 5;
+		textarea.rows = 4;
 	}
 
 
