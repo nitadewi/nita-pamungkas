@@ -9,10 +9,7 @@ app.use(express.json());
 const path = require('path');
 
 app.use(express.static(path.join(__dirname, '/public')));
-app.use((req,res)=>{
-  res.status(404);
-  res.send(`<h1>ERROR 404 NOT FOUND</h1>`)
-})
+
 
 
 const url ='https://script.google.com/macros/s/AKfycbyEIY5o7o5eKg3uzKMx0D4E6nPPc6bnK1UoUfVR1ruHxcRaHZHP22ZTozoQg07qPn-K/exec'
@@ -45,6 +42,8 @@ app.get('/proxy', async (req, res) => {
       res.status(error.response ? error.response.status : 500).send(error.message);
     }
   });
+
+
 
 app.listen(port, () => {
   console.log(`Proxy server running at http://localhost:${port}`);
