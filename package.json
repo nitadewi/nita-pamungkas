@@ -1,7 +1,7 @@
 {
   "name": "nita-pamungkas",
   "version": "2.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "20.x"
   },
