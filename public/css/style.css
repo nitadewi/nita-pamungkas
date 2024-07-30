@@ -1,12 +1,12 @@
-@font-face {
+/* @font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon/icomoon.eot?srf3rx");
   src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
-}
+} */
 
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+HR:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
 /* =======================================================
 *
 * 	Template Style 
@@ -20,6 +20,7 @@ body {
   color: #f6f3f3;
   background: #fff;
 }
+
 
 #copyMessage {
   position: fixed;
@@ -35,7 +36,7 @@ body {
 }
 
 .namaMempelai {
-  font-family: "Playwrite HR", cursive;
+  font-family: "Pinyon Script", cursive;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -1680,6 +1681,7 @@ form label {
 .comment-box {
   max-height: 58vh ;
   overflow-y: scroll;
+  overflow-wrap: break-word;
   margin-bottom: 10px;
 }
 

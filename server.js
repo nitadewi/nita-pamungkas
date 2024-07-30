@@ -1,47 +1,76 @@
 const express = require('express');
+const fs = require('fs').promises;
 const axios = require('axios');
-const cors = require('cors'); // Include the cors package
+const cors = require('cors');
 const app = express();
 const port = 3001;
-
-app.use(cors()); // Enable CORS for all routes
-app.use(express.json());
 const path = require('path');
 
 app.use(express.static(path.join(__dirname, '/public')));
+const DATA_FILE = path.join(__dirname, 'public', 'data', 'data.json');
 
+app.use(cors());
+app.use(express.json());
 
-const url ='https://script.google.com/macros/s/AKfycbyEIY5o7o5eKg3uzKMx0D4E6nPPc6bnK1UoUfVR1ruHxcRaHZHP22ZTozoQg07qPn-K/exec'
+app.get('/main', (req, res)=> {
+  res.sendFile(path.join(__dirname,'/public','main.html'));
+})
 
-
-app.post('/proxy', async (req, res) => {
-  try {
-    const response = await axios.post(url, req.body, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    res.json(response.data);
-  } catch (error) {
-    res.status(error.response ? error.response.status : 500).send(error.message);
-  }
-});
-
-
-app.get('/proxy', async (req, res) => {
+  async function readData() {
     try {
-      const response = await axios.get(url, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: req.query // Pass query parameters if any
-      });
-      res.json(response.data);
+      const data = await fs.readFile(DATA_FILE, 'utf8');
+      return JSON.parse(data);
     } catch (error) {
-      res.status(error.response ? error.response.status : 500).send(error.message);
+      // If file doesn't exist or is empty, return an empty array
+      return [];
+    }
+  }
+  
+  async function writeData(data) {
+    await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
+  }
+  
+  // GET endpoint to retrieve all items
+  app.get('/comment', async (req, res) => {
+    try {
+      const data = await readData();
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: 'Error reading data' });
     }
   });
 
+  
+  app.post('/comment', async (req, res) => {
+    try {
+      const { name, message, rsvp } = req.body;
+  
+      // Check if all required fields are present
+      if (!name || !message) {
+        return res.status(400).json({ error: 'Missing required fields' });
+      }
+  
+      let data = await readData();
+      
+      // If data is not an array, initialize it as an empty array
+      if (!Array.isArray(data)) {
+        data = [];
+      }
+  
+      const newItem = {
+        id: Date.now(),
+        name,
+        message,
+        rsvp
+      };
+      data.push(newItem);
+      await writeData(data);
+      res.status(201).json(newItem);
+    } catch (error) {
+      console.error('Error saving data:', error);
+      res.status(500).json({ error: 'Error saving data' });
+    }
+  });
 
 
 app.listen(port, () => {

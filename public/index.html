@@ -39,7 +39,7 @@
             $(".tombol").click(function() {
                 $('.fh5co-loader').show();
                 localStorage.setItem('visitedPageA', 'true');
-                var new_url = "main.html";
+                var new_url = "/main";
                 window.location.href = new_url;
             });
 
@@ -48,8 +48,10 @@
             var to = url.searchParams.get("to");
             if (to) {
                 document.getElementById("untuk").innerHTML = to.toUpperCase();
-                console.log(to);
-            }
+				localStorage.setItem("to", to)
+			} else {
+				localStorage.removeItem("to", to)
+			}
         });
 	</script>
 
