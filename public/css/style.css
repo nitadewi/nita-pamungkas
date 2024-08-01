@@ -48,6 +48,10 @@ body {
 
 }
 
+.open {
+  background: url('../images/bg-big.png') no-repeat center center/cover;
+}
+
 
 .section {
   justify-content: center;
@@ -123,8 +127,45 @@ body {
 
 }
 
+.bottom-left-text {
+  position: absolute;
+  bottom: 100px; /* Adjust this value as needed for spacing */
+  left: 30%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #020000; /* Adjust text color as needed */
+  z-index: 1; /* Ensure the text is above the background */
+  padding: 10px; /* Optional: Add somes padding */
+}
+
+.tombol {
+  font-size: 0.9em;
+  border-radius: 10px;
+  padding: 5px 10px; /* Adjust padding to your liking */
+  -webkit-appearance: none; /* Standardize appearance */
+  position: absolute;
+  bottom: 20px; /* Adjust this value as needed for spacing from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #31496A;
+  white-space: nowrap; /* Prevent text from wrapping */
+  z-index: 1; /* Ensure the button is above the background image */
+  color: #f7f3f3; /* Text color */
+  border: none; /* Remove default border */
+   /* Adjust font size as needed */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
 
 @media (max-width: 1080px) {
+
+  .open {
+    background: url('../images/bg-small.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
   .content {
       padding: 5px;
   }

@@ -1,16 +1,3 @@
-const mainPage = "/";
-if (!localStorage.getItem('visitedPageA')) {
-    if(localStorage.getItem('to')){
-        window.location.href = "/?to="+localStorage.getItem('to');
-    } else {
-        window.location.href = mainPage;
-    }
-   
-} else {
-    // Optionally clear the localStorage entry after verification
-    localStorage.removeItem('visitedPageA');
-}
-
 $(document).load(function () {
         $('.fh5co-loader').show();
     });
@@ -24,14 +11,11 @@ var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
 
 // default example
 simplyCountdown('.simply-countdown-one', {
-year: 2024,
-month: 8,
-day: 10
-});
+    year: 2024,
+    month: 8,
+    day: 10
+    });
 
-// audio
-    // var audioElement = document.getElementById('player');
-    // audioElement.volume = 0.1;
 
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(function() {
@@ -121,6 +105,50 @@ $('#name').on('input', function() {
   });
 
 
+  const playPauseButton = document.getElementById('playSound');
+        const audio = document.getElementById('audio');
+        const icon = playPauseButton.querySelector('i');
 
-  AOS.init();
+        function togglePlayPause() {
+        if (audio.paused) {
+        audio.play();
+        icon.classList.remove('icon-play');
+        icon.classList.add('icon-pause');
+        } else {
+        audio.pause();
+        icon.classList.remove('icon-pause');
+        icon.classList.add('icon-play');
+        }
+        }
+
+        playPauseButton.addEventListener('click', togglePlayPause);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const revealButton = document.getElementById('revealButton');
+            const sectionOpen = document.getElementById('section-open');
+            const sectionMain = document.getElementById('section-main');
+            
+            
+            revealButton.addEventListener('click', function() {
+            sectionOpen.classList.add('hidden');
+            sectionMain.classList.remove('hidden');
+            togglePlayPause()
+
+            AOS.init();
+        });
+
+
+});
+
+            var url = new URL(window.location.href);
+            var to = url.searchParams.get("to");
+            if (to) {
+                document.getElementById("untuk").innerHTML = to.toUpperCase();
+				
+			}
+
+
+
+
+
 

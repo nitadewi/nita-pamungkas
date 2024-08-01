@@ -17,8 +17,6 @@
 
 
 	var offcanvasMenu = function() {
-
-
 		$('#fh5co-offcanvas .has-dropdown').addClass('offcanvas-has-dropdown');
 		$('#fh5co-offcanvas')
 			.find('li')
