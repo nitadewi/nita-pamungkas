@@ -1,76 +1,54 @@
 const express = require('express');
-const fs = require('fs').promises;
 const axios = require('axios');
-const cors = require('cors');
+const cors = require('cors'); // Include the cors package
 const app = express();
 const port = 3001;
+
+app.use(cors()); // Enable CORS for all routes
+app.use(express.json());
 const path = require('path');
 
 app.use(express.static(path.join(__dirname, '/public')));
-const DATA_FILE = path.join(__dirname, 'public', 'data', 'data.json');
 
-app.use(cors());
-app.use(express.json());
+
+const url ='https://script.google.com/macros/s/AKfycbyOUnB-ZG6F3WQVi5xgYNqdkjQIO_DzbMiXfT1ZNAQRt7mlFG2OXmyKAtGXbfYUiqp3/exec'
 
 app.get('/main', (req, res)=> {
   res.sendFile(path.join(__dirname,'/public','main.html'));
 })
 
-  async function readData() {
-    try {
-      const data = await fs.readFile(DATA_FILE, 'utf8');
-      return JSON.parse(data);
-    } catch (error) {
-      // If file doesn't exist or is empty, return an empty array
-      return [];
-    }
+app.post('/comment', async (req, res) => {
+  try {
+    const response = await axios.post(url, req.body, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    res.json(response.data);
+  } catch (error) {
+    res.status(error.response ? error.response.status : 500).send(error.message);
   }
-  
-  async function writeData(data) {
-    await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
-  }
-  
-  // GET endpoint to retrieve all items
-  app.get('/comment', async (req, res) => {
+});
+
+
+app.get('/comment', async (req, res) => {
     try {
-      const data = await readData();
-      res.json(data);
+      const response = await axios.get(url, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: req.query // Pass query parameters if any
+      });
+      if (response.status !== 200) {
+        throw new Error(`Request failed with status code ${response.status}`);
+      } else {
+        res.json(response.data);
+      }
     } catch (error) {
-      res.status(500).json({ error: 'Error reading data' });
+      res.status(error.response ? error.response.status : 500).send(error.message);
     }
   });
 
-  
-  app.post('/comment', async (req, res) => {
-    try {
-      const { name, message, rsvp } = req.body;
-  
-      // Check if all required fields are present
-      if (!name || !message) {
-        return res.status(400).json({ error: 'Missing required fields' });
-      }
-  
-      let data = await readData();
-      
-      // If data is not an array, initialize it as an empty array
-      if (!Array.isArray(data)) {
-        data = [];
-      }
-  
-      const newItem = {
-        id: Date.now(),
-        name,
-        message,
-        rsvp
-      };
-      data.push(newItem);
-      await writeData(data);
-      res.status(201).json(newItem);
-    } catch (error) {
-      console.error('Error saving data:', error);
-      res.status(500).json({ error: 'Error saving data' });
-    }
-  });
 
 
 app.listen(port, () => {

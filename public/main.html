@@ -17,6 +17,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Magnific Popup -->
@@ -30,6 +32,10 @@
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<script src="js/moment.js"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -54,7 +60,7 @@
 		</section>
 		<section class="section section2">
 			<div class="content">
-				<div class="display-tc animate-box" data-animate-effect="fadeIn">
+				<div  data-aos="zoom-in" data-aos-duration="2000">
 					<h1><i>Assalamualaikum wr wb</i></h1>
 					<p> Maha Suci Allah SWT yang telah
 						menciptakan makhluk-Nya berpasang-pasangan. Dengan memohon rahmat dan ridho Allah SWT
@@ -82,23 +88,23 @@
 			</div>
 		</section>
 		<section class="section section3">
-			<div class="content">
+			<div class="content" data-aos="fade-up" data-aos-duration="2000">
 				<h1>Akad Nikah</h1>
-				
 				<p>Sabtu, 10 Agustus 2024</p>
 				<p>08.30 - 11.30 WIB</p>
-				<p><u>Wastra Bumbu</u></p>
+				<p style="font-size: 22px;"><u>Wastra Bumbu</u></p>
 				<p>Jl. Slamet Riyadi no 464, Purwosari, Laweyan</p>
 				<p>Surakarta, Jawa Tengah</p>
 				<p><a target="_blank" href="https://maps.app.goo.gl/1i3SbJ4B8b1k4WNBA" style="font-size: 16px" class="btn btn-sm">buka maps -></a></p>
+				<p>we overjoyed to celebrate with you, please rsvp by 5th august 2024. We have Reserved seats in your honor ~</p>
 			</div>
 		</section>
 		<section class="section section4">
 			<div class="content">
 				
-				<div class="animate-box">
-					<h1>Pesan</h1>
-				<p>If your love language is words of affirmation, don't hesitate to leave us your best wishes 💖. But if your love language is gift giving, you can send a gift by clicking  <a href="#" data-toggle="modal" data-target="#exampleModalCenter">this.</a></p>
+				<div data-aos="fade-up" data-aos-duration="2000">
+					<h1>Pesan & konfirmasi</h1>
+				<p>If your love language is words of affirmation, don't hesitate to leave us your best wishes 💖. But if your love language is gift giving, you can send a gift by clicking <smal><a href="#" data-toggle="modal" data-target="#exampleModalCenter">this.</a></smal></p>
 				
 					<form id="myForm" action="#">
 						<div class="row form-group">
@@ -110,7 +116,7 @@
 						</div>
 						<div class="row form-group">
 							<div class="col-12 input-group-sm">
-								<label for="subject">rsvp</label>
+								<label for="subject">konfirmasi kehadiran</label>
 								<select name="rsvp" class="form-control"  id="rsvp" required>
 									<option value="" >rsvp</option>
 									<option value="hadir">hadir</option>
@@ -134,29 +140,28 @@
 		</section>
 
 		<section class="komentar">
-			
 				<div class="col-lg-12 animate-box">
 					<div id="doa" class="comment-box col-sm-12 col-md-12  pb-4">
-					</div>	
-			
+					</div>		
 			</div>
 		</section>
 
 
 		<section class="section ucapan">
 			<div class="content">
-				<div class="display-tc animate-box" data-animate-effect="fadeIn">
+				<div data-aos="zoom-in" data-aos-duration="2000">
 					<p>Atas kehadiran dan do’a restu dari Bapak/Ibu/Saudara/i sekalian, kami mengucapkan Terima Kasih.
 						<i>Wassalamu’alaikum wr wb</i></p>
 						
 					<p>Kami yang berbahagia</p>
 					<h4>NITA &amp; PAMUNGKAS</h4>
-					<audio id="player" autoplay loop controls>
-						<source src="/music/bg-music.mp3" type="audio/mp3">
-					</audio>
-				</div>
-				
-				
+					<button id="playSound"><i class="icon-play"></i></button>
+					 <audio id="audio" src="/music/sweet.mp3" type="audio/mpeg"></audio>
+
+					<!-- <audio id="player" autoplay loop controls>
+						<source src="/music/sweet.mp3" type="audio/mp3">
+					</audio> -->
+				</div>		
 			</div>
 		</section>
 
@@ -174,7 +179,9 @@
 		</section>
 
 	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		<a href="#" class="js-gotop">
+			<i class="icon-arrow-up"></i>
+		</a>
 	</div>
 
 	  <!-- Modal -->
@@ -224,5 +231,38 @@
 	<script src="js/main.js"></script>
 	<script src="js/script.js"></script>
 	</body>
+
+	<script>
+		const playPauseButton = document.getElementById('playSound');
+		const audio = document.getElementById('audio');
+		const icon = playPauseButton.querySelector('i');
+	
+		function togglePlayPause() {
+		  if (audio.paused) {
+			audio.play();
+			icon.classList.remove('icon-play');
+			icon.classList.add('icon-pause');
+		  } else {
+			audio.pause();
+			icon.classList.remove('icon-pause');
+			icon.classList.add('icon-play');
+		  }
+		}
+	
+		playPauseButton.addEventListener('click', togglePlayPause);
+	
+		window.addEventListener('load', () => {
+		  audio.muted = true;
+		  audio.play().then(() => {
+			audio.muted = false;
+			icon.classList.remove('icon-play');
+			icon.classList.add('icon-pause');
+		  }).catch((error) => {
+			console.error('Auto-play was prevented', error);
+			icon.classList.remove('icon-pause');
+			icon.classList.add('icon-play');
+		  });
+		});
+	  </script>
 </html>
 

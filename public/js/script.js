@@ -1,32 +1,3 @@
-// script.js
-document.addEventListener('DOMContentLoaded', function () {
-    // Scroll Up Button Functionality
-    document.querySelectorAll('.scroll-up').forEach(button => {
-        button.addEventListener('click', function () {
-            const currentSection = button.parentElement;
-            const previousSection = currentSection.previousElementSibling;
-
-            if (previousSection) {
-                previousSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    // Show Scroll Up Button when reaching the bottom of the section
-    window.addEventListener('scroll', function () {
-        document.querySelectorAll('.section').forEach(section => {
-            const scrollUpButton = section.querySelector('.scroll-up');
-            const rect = section.getBoundingClientRect();
-
-            if (rect.bottom <= window.innerHeight) {
-                scrollUpButton.style.display = 'block';
-            } else {
-                scrollUpButton.style.display = 'none';
-            }
-        });
-    });
-});
-
 const mainPage = "/";
 if (!localStorage.getItem('visitedPageA')) {
     if(localStorage.getItem('to')){
@@ -59,20 +30,20 @@ day: 10
 });
 
 // audio
-var audioElement = document.getElementById('player');
-audioElement.volume = 0.1;
+    // var audioElement = document.getElementById('player');
+    // audioElement.volume = 0.1;
 
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-        const messageElement = document.getElementById('copyMessage');
-        messageElement.style.display = 'block';
-        setTimeout(() => {
-            messageElement.style.display = 'none';
-        }, 1000); // Hide after 2 seconds
-    }).catch(function(err) {
-        console.error('Failed to copy text: ', err);
-    });
-}
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            const messageElement = document.getElementById('copyMessage');
+            messageElement.style.display = 'block';
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 1000); // Hide after 2 seconds
+        }).catch(function(err) {
+            console.error('Failed to copy text: ', err);
+        });
+    }
 
 
 $(document).ready(function() {
@@ -148,3 +119,8 @@ $('#name').on('input', function() {
     var remaining = 0 + $(this).val().length;
     $('#messageCount').text(remaining + '/150');
   });
+
+
+
+  AOS.init();
+

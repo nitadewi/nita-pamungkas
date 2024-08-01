@@ -64,12 +64,17 @@ body {
   background: url('../images/bg-header-2.png') no-repeat center center/cover;
 }
 
+.section1 h1 {
+  font-family: "Pinyon Script", cursive;
+}
+
 .section2 {
   align-items: center;
   background-color: #ffffff;
 }
 
 .section h1{
+  
   padding: 30px 0 10px 0;
 }
 
